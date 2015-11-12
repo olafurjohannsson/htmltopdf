@@ -1,0 +1,7 @@
+This name is a work in progress :)
+
+The gist of this project is that it should encapsulate the functionality needed to create PDFs from HTML templates, or just pdf from HTML file/html string
+
+I use Handlebars and Phantom-node to achieve this effect.
+
+There should be support for win32/osx/nix
