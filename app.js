@@ -19,11 +19,11 @@ var renderPdf = function (session, cb) {
 			if (page != null) {
 				page.close();
 			}
-			catch (e) {
-				console.log(e);
-			}
 		}
-		return cb('Exception rendering pdf:' e.toString());
+		catch (ex) {
+			console.log(ex);
+		}
+		return cb('Exception rendering pdf:', e.toString());
 	}
 };
 
