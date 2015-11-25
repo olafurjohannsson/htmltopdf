@@ -78,6 +78,7 @@ PDF.prototype._create = function (htmlTemplateData, htmlData, pdfName, fn) {
 	this._render(html, pdfName, fn);
 };
 
+
 // Create PDF from template and path, specifying where the template is
 PDF.prototype.createFromTemplatePath = function (htmlTemplatePath, htmlData, pdfName, fn) {
 	
@@ -88,7 +89,7 @@ PDF.prototype.createFromTemplatePath = function (htmlTemplatePath, htmlData, pdf
 			return;
 		}
 
-		this._create(data, htmlData, pdfName, fn);
+		new PDF()._create(data, htmlData, pdfName, fn);
 	});
 };
 
