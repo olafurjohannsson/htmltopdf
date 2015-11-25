@@ -4,10 +4,15 @@ var phantom = require('phantom'),
 
 
 
+// Function ctor
 var PDF = function () {
 	this.isWindows = process.platform === 'win32';
 };
 
+
+/*
+	*** Private interface ***
+*/
 
 PDF.prototype._render = function (html, pdfName, fn) {
 
@@ -78,30 +83,29 @@ PDF.prototype._create = function (htmlTemplateData, htmlData, pdfName, fn) {
 	this._render(html, pdfName, fn);
 };
 
+/*
+	*** Public Interface ***
+*/
 
-// Create PDF from template and path, specifying where the template is
-PDF.prototype.createFromTemplatePath = function (htmlTemplatePath, htmlData, pdfName, fn) {
-	
-	// Read htmlTemplate
-	fs.readFile(htmlTemplatePath, function (error, data) {
-		if (error) {
-			fn(error, false);
-			return;
-		}
-
-		new PDF()._create(data, htmlData, pdfName, fn);
-	});
+/* Create PDF from template and data
+	 @htmlTemplateData: The handlebars raw HTML template data
+	 @data: 			The data to feed to handlebars template
+	 @pdfName:		    The name of the outputted PDF
+	 @fn:				Callback which is called on error/success/fail
+*/
+PDF.prototype.createFromTemplateData = function (htmlTemplateData, data, pdfName, fn) {
+	this._create(htmlTemplateData, data, pdfName, fn);
 };
 
-// Create PDF from template and data
-PDF.prototype.createFromTemplateData = function (htmlTemplateData, htmlData, pdfName, fn) {
-	this._create(htmlTemplateData, htmlData, pdfName, fn);
-};
-
-// Create PDF from straight HTML
+/* Create PDF from straight HTML
+	 @html:	   HTML data with populated data 		
+	 @pdfName: The name of the outputted PDF
+	 @fn:	   Callback which is called on error/success/fail
+*/
 PDF.prototype.createFromHtml = function (html, pdfName, fn) {
 	this._render(html, pdfName, fn);
 };
 
 // export our function
 module.exports = new PDF();
+
