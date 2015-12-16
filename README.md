@@ -21,7 +21,7 @@ The former method <i>createFromHtml(html, pdfName, callback)</i> takes in HTML, 
 
 <h2>Usage:</h2>
 <code>
-htmltopdf.createFromHtml("<html><h1>thisishtml</h1></html>, pdfName, function (err, success) {
+htmltopdf.createFromHtml("&gthtml&lt&gth1&lthtml&gt/h1&lt&gt/html&lt, pdfName, function (err, success) {
                      if (success) {
                                     console.log('Success creating ' + pdfName);
                                                 }
