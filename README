@@ -1,3 +1,4 @@
+```html
 Yet another HTML to PDF Node package, this is just a package i made for myself because i had a problem specifically using HTML to PDF with templates.
 
 This package has two public methods
@@ -15,3 +16,4 @@ The gist of this project is that it should encapsulate the functionality needed 
 I use Handlebars and Phantom-node to achieve this effect.
 
 There should be support for win32/osx/nix
+```
