@@ -76,12 +76,24 @@ PDF.prototype._create = function (htmlTemplateData, htmlData, pdfName, fn) {
 	// Compile our Handlebars template
 	var template = handlebars.compile(htmlTemplateData);
 	
+	// If string
+	if (!(htmlData instanceof Object)) {
+		try {
+			htmlData = JSON.parse(htmlData);
+		}
+		catch (e) {
+			fn(e, false);
+			return;
+		}
+	}
+	
 	// Generate HTML string from the template
 	var html = template(htmlData);
-
+	
 	// Render it to PDF
 	this._render(html, pdfName, fn);
 };
+
 
 /*
 	*** Public Interface ***
