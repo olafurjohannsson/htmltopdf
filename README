@@ -1,6 +1,7 @@
 Yet another HTML to PDF Node package, this is just a package i made for myself because i had a problem specifically using HTML to PDF with templates.
 
-This package has two public methods 
+This package has two public methods
+<h1>test</h1>
 - createFromTemplateData(html, htmlData, pdfName, callback)
 - createFromHtml(html, pdfName, callback)
 
