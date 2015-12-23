@@ -13,28 +13,59 @@ The gist of it is that there are two methods
 </p>
 
 <p>
-Both of these methods are what make up this package, the callback is a function that takes in two parameters, <strong>callback (error, success)</strong> which do what they imply, if success then no error, if not success then the error field is populated with the information needed to correctify.
+Both of these methods are what make up this package, the callback is in the classic Node style, basically a function that has two parameters, <strong>callback (error, success)</strong> which do what they imply, if success then no error, if not success then the error field is populated with the information needed to correctify.
 </p>
 
 <h2>Usage for <small>createFromHtml</small></h2>
 <p>
-The former method <i>createFromHtml(html, pdfName, callback)</i> takes in HTML, the name of the PDF to be created and the previously explained callback
-<code>
-htmltopdf.createFromHtml("&lthtml&gt&lth1&gthtml&lt/h1&gt&lt/html&gt", "pdfName.pdf", function (err, success) { ... });
-</code>
+The former method <i>createFromHtml(html, pdfName, callback)</i> takes in an HTML string and the name of the PDF to be created and the previously explained callback.
+<div>
+<pre>
+htmltopdf.createFromHtml("&lt;html&gt;&lt;h1&gt;html&lt;/h1&gt;&lt;/html&gt;", "pdfName.pdf", function (err, success) { 
+	... do stuff
+});
+</pre>
+</div>
+</p>
+
+<p>
+If you want to read in a file just use the <i>fs</i> module
+<pre>
+fs.readFile('file.html', function (err, data) {
+	htmltopdf.createFromHtml(data, "pdfName.pdf", function (err, success) { 
+		... do stuff
+	});
+});
+</pre>
 </p>
 
 <h2>Usage for <small>createFromTemplateData</small></h2>
-<p>
-The former method <i>createFromHtml(html, pdfName, callback)</i> takes in HTML, the name of the PDF to be created and the previously explained callback.
-</p>
 
 <p>
-The latter method <i>createFromTemplateData(html, htmlData, pdfName, callback)</i> uses templates to create the PDF. You send in the template HTML, such as <blockquote>&gthtml&lt{{data}}&gt/html&lt</blockquote> and it's data <blockquote>{{'data':'test'}}</blockquote> <strong>
+The latter method <i>createFromTemplateData(html, htmlData, pdfName, callback)</i> uses templates to create the PDF. You send in the template HTML, such as <pre>&lt;html&gt;&lt;h1&gt;{{data}}&lt;/h1&gt;&lt;/html&gt;</pre> 
+
+<span>
+where data is a JS object 
+</span>
+<pre>{{'data':'test'}}</pre> 
+
+<span>The output would be</span>
+<pre>
+&lt;html&gt;&lt;h1&gt;test&lt;/h1&gt;&lt;/html&gt;
+</pre>
+
+<pre>
+htmltopdf.createFromTemplateData("&lt;html&gt;&lt;h1&gt;{{data}}&lt;/h1&gt;&lt;/html&gt;", "{{'data':'test'}}", "pdfName.pdf", function (err, success) {
+	if (success) {
+		... do stuff
+	}
+});
+</pre>
+
 </p>
 
-<h3>Example:</h3>
-<code>
+<h3>Example (see example.js):</h3>
+<pre>
 var htmltopdf = require('./htmltopdf'),
 	fs = require('fs');
 
@@ -44,7 +75,8 @@ if (process.argv.length > 2) {
 
 	if (pdfName.indexOf('.pdf') > 0) {
 		var htmlData = process.argv[4];
-				
+		
+		// If htmlData is valid
 		if (!!htmlData) {
 			htmltopdf.createFromTemplateData(html, htmlData, pdfName, function (err, success) {
 				if (success) {
@@ -66,22 +98,7 @@ if (process.argv.length > 2) {
 			});
 		}
 	}
-	else {
-		print('\'pdfName\' should contain .pdf extension!');
-	}
-}
-else {
-	printUsage();
 }
 
-function print(message) {
-	console.log(message);
-}
 
-function printUsage() {
-	console.log('Send in string HTML and PDF name!');
-	console.log('Usage:');
-	console.log('Creating from HTML: node src/main test.pdf &lt;html&gt;&lt;h1&gt;test&lt;/h1&gt;&lt;/html&gt;');
-	console.log('Creating from HTML template: node src/main test.pdf "&lt;html&gt;&lt;h1&gt;{{test}}&lt;/h1&gt;&lt;/html&gt;" "{\"test\":123}"');
-}
-</code>
+</pre>
