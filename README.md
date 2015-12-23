@@ -65,7 +65,8 @@ htmltopdf.createFromTemplateData("&lt;html&gt;&lt;h1&gt;{{data}}&lt;/h1&gt;&lt;/
 
 </p>
 
-<h3>Example (see example.js):</h3>
+<h3>Example using fs module</h3>
+<h4>See test.js for examples</h4>
 <pre>
 var htmltopdf = require('./htmltopdf'),
 	fs = require('fs');

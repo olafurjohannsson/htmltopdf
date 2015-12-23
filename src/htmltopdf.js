@@ -1,5 +1,5 @@
 var phantom = require('phantom'),
-	handlebars = require('./handlebars'), // TODO: should not be local file
+	handlebars = require('handlebars'),
 	fs = require('fs');
 
 
