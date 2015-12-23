@@ -54,6 +54,7 @@ where data is a JS object
 &lt;html&gt;&lt;h1&gt;test&lt;/h1&gt;&lt;/html&gt;
 </pre>
 
+<h3>Example:</h3>
 <pre>
 htmltopdf.createFromTemplateData("&lt;html&gt;&lt;h1&gt;{{data}}&lt;/h1&gt;&lt;/html&gt;", "{{'data':'test'}}", "pdfName.pdf", function (err, success) {
 	if (success) {
