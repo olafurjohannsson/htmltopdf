@@ -1,16 +1,12 @@
 {
   "name": "htmltopdf",
-  "version": "0.0.4",
+  "version": "0.5",
   "description": "A node package to convert HTML to PDF, it supports sending in straight HTML and convert to PDF. It also supports sending in template in handlebars format with a data string and convert that to PDF",
-  "main": "htmltopdf.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "index.js",
   "dependencies": {
     "phantom": "^0.8.3",
     "handlebars": "^4.0.5"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
