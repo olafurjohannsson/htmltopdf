@@ -36,27 +36,27 @@ PDF.prototype._render = function (html, pdfName, fn) {
 					format: 'A4'
 				});
 				
-				// Set content in PhantomJS page
-				page.set('content', html);
-
-				// render page
-				return page.render(pdfName, function () {
-					
-					// Exit PhantomJS
-					ph.exit();
-					
-					// If callback
-					if (fn)
-						fn(null, true);
-				});
+                // Set content in PhantomJS page
+                page.set('content', html, function () {
+                    
+                    // render page
+                    return page.render(pdfName, function () {
+                        
+                        // Exit PhantomJS
+                        ph.exit();
+                        
+                        // If callback
+                        if (!!fn)
+                            return fn(null, true);
+                    });
+                });
 			});
 		}
 		catch (e) {
 			ph.exit();
-			fn(e, false);
+			return fn(e, false);
 		}
-		
-		return true;
+        
 	}
 
 	/*
@@ -72,9 +72,15 @@ PDF.prototype._render = function (html, pdfName, fn) {
 
 // Create from HTML template
 PDF.prototype._create = function (htmlTemplateData, htmlData, pdfName, fn) {
-	
+
 	// Compile our Handlebars template
-	var template = handlebars.compile(htmlTemplateData);
+	var template = null;
+    try {
+        template = handlebars.compile(htmlTemplateData);
+    } 
+    catch (e) {
+        return fn('Could not compile HTML template data', false);
+    } 
 	
 	// If string
 	if (!(htmlData instanceof Object)) {
@@ -82,13 +88,18 @@ PDF.prototype._create = function (htmlTemplateData, htmlData, pdfName, fn) {
 			htmlData = JSON.parse(htmlData);
 		}
 		catch (e) {
-			fn(e, false);
-			return;
+			return fn('HTML is not valid JSON', false);
 		}
 	}
 	
-	// Generate HTML string from the template
-	var html = template(htmlData);
+    // Generate HTML string from the template
+    var html = null;
+    try {
+        html = template(htmlData);
+    }
+    catch (e) {
+        return fn('Could not inject HTML data into template', false);
+    }
 	
 	// Render it to PDF
 	this._render(html, pdfName, fn);

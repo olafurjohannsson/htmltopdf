@@ -1,4 +1,4 @@
-var htmltopdf = require('./htmltopdf');
+var htmltopdf = require('./index');
 
 
 // Create PDF file from template using handlebars
