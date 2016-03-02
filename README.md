@@ -1,5 +1,9 @@
 <h1>HTML TO PDF</h1>
 
+https://www.npmjs.com/package/htmltopdf
+
+<strong>npm install htmltopdf</strong>
+
 <p>
 Yet another HTML to PDF converter. This is a package i made to solve specific HTML conversion problems i had in one of my projects.
 </p>
