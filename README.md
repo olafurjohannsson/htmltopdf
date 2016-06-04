@@ -1,5 +1,8 @@
 <h1>HTML TO PDF</h1>
 
+author: olafur@johannsson.co
+web: http://olafurjohannsson.com
+
 Convert HTML sites to PDF with this simple package.
 
 https://www.npmjs.com/package/htmltopdf
