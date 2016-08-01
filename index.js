@@ -67,12 +67,13 @@ PDF.prototype._render = function (html, pdfName, fn) {
     /*
         Render our PDF from HTML
     */
-    if (this.isWindows) {
-        phantom.create(function (ph) { render(ph, pdfName); }, { dnodeOpts: { weak: false } });
-    }
-    else {
-        phantom.create(function (ph) { render(ph, pdfName); });
-    }
+	var options = { parameters: { 'web-security': 'no' } };
+
+	if (this.isWindows) {
+		options['dnodeOpts'] = { weak: false };
+	}
+
+	phantom.create(function (ph) { render(ph, pdfName); }, options);
 };
 
 // Create from HTML template
