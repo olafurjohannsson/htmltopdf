@@ -53,7 +53,7 @@ PDF.prototype._render = function (html, pdfName, fn) {
                 
                 // Set content in PhantomJS page
                 page.set('content', html, function () {
-                    
+                    ; // event handler, do nothing after setting content
                 });
             });
         }
