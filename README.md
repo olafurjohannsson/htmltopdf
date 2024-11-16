@@ -1,8 +1,8 @@
 <h1>HTML TO PDF</h1>
 
 author: Ólafur Aron Jóhannsson<br>
-email: olafur@johannsson.co<br>
-website: http://olafurjohannsson.com<br>
+email: olafurjohannss@gmail.com<br>
+website: https://www.olafuraron.is<br>
 
 Convert HTML sites to PDF with this simple package.
 
